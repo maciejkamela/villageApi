@@ -1,0 +1,45 @@
+http://www.sitepoint.com/using-node-mysql-javascript-client/
+node app.js
+grunt watch -> to samo co node deamon
+
+nodemon ./app.js localhost 3000
+https://github.com/remy/nodemon#nodemon
+
+POST
+
+{
+"title" : "Killer",
+"director": "XYZ",
+"genre" : "dramma",
+"production" : "PL",
+"year": 1999,
+"trailer": "https://www.youtube.com/watch?v=zmTGhBD1iNE",
+"poster": "http://1.fwcdn.pl/po/10/90/1090/7196616.3.jpg",
+"boxofficeInDollars" : 4930000,
+"mainRoles" :[
+  {"firstName" : "Cezaryt",
+  "lastName" : "Pazura"},
+  {"firstName" : "Joanna",
+  "lastName" : "Kozuchowska"}
+],
+"oscars" : 0
+}
+
+mongo:
+ C:\Program Files\MongoDB\Server\3.0\bin\mongo.exe
+
+ External tools:
+
+ settings:
+
+ Name: mongo
+ Program: C:\Program Files\MongoDB\Server\3.0\bin\mongod.exe
+ Working directory: D:\Lynda\LyndaJS\NodeExpress\nodetest1\data
+
+ plugin do mongo w webstorm
+
+ http://docs.mongodb.org/manual/reference/sql-comparison/
+
+ https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
+
+ http://localhost:3000/movies?title=Serpico
