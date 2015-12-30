@@ -11,7 +11,8 @@ module.exports = function(grunt) {
             all: [
                 'Gruntfile.js',
                 'routs/*.js',
-                'app.js'
+                'app.js',
+                'test.js'
             ],
             options: {
                 jshintrc: '.jshintrc'
@@ -19,12 +20,12 @@ module.exports = function(grunt) {
         },
         execute: {
             target: {
-                src: ['app.js']
+                src: ['app.js','test.js']
             }
         },
         watch: {
             scripts: {
-                files: ['app.js'],
+                files: ['app.js','test.js'],
                 tasks: ['execute']
             }
         }
@@ -33,7 +34,6 @@ module.exports = function(grunt) {
         // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-execute');
 };

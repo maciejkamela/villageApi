@@ -2,8 +2,14 @@ http://www.sitepoint.com/using-node-mysql-javascript-client/
 node app.js
 grunt watch -> to samo co node deamon
 
+https://www.codementor.io/nodejs/tutorial/node-js-mysql
+https://github.com/felixge/node-mysql#escaping-query-values
+
 nodemon ./app.js localhost 3000
 https://github.com/remy/nodemon#nodemon
+https://code.google.com/p/siege-windows/
+
+
 
 POST
 
