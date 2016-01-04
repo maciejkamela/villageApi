@@ -47,8 +47,4 @@ app.get("/employees",function(req,res){
     console.log('password', req.body);
     getAllEmployees(req,res);
 });
-
-
-
-
 app.listen(port);

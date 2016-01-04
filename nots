@@ -1,13 +1,22 @@
+nodemon localhost 3000
+http://localhost:3000/articles/12
+
 http://www.sitepoint.com/using-node-mysql-javascript-client/
-node app.js
+node route.js
 grunt watch -> to samo co node deamon
+********************************
+API
+http://thejackalofjavascript.com/list-all-rest-endpoints/
+http://bigspaceship.github.io/blog/2014/05/14/how-to-create-a-rest-api-with-node-dot-js/
+**********************************
 
 https://www.codementor.io/nodejs/tutorial/node-js-mysql
 https://github.com/felixge/node-mysql#escaping-query-values
 
-nodemon ./app.js localhost 3000
+nodemon ./route.js localhost 3000
 https://github.com/remy/nodemon#nodemon
 https://code.google.com/p/siege-windows/
+http://www.codeproject.com/Articles/996559/URL-shortener-in-Node-js-plus-Express-js-plus-MySQ
 
 
 
