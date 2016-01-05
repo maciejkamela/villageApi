@@ -1,5 +1,5 @@
 module.exports = function (app) {
-    var articles = require('./apiCalls/api.js');
+    var articles = require('./../apiCalls/api.js');
     var allArticles = 'select * from artykuly';
     var singleArticle = 'select * from artykuly where id = ?';
 
