@@ -18,3 +18,10 @@
 //    sequelize.query('Select * from artykuly').success;
 //};
 
+// Jak to zrobic zeby np. tu umieszczac wszystkie pliki z katalogu routes, tak zebym nie musial
+//w app.j podawac require do kazdego z tych plikow , bo bedzie ich tu wiecej ??? Potrzebne to mi do dokumentacji API
+
+module.exports = {
+    articles:require('./articlesRoute'),
+    test: require('./test')
+}
