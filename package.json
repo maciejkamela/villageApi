@@ -15,17 +15,18 @@
     "url": "https://github.com/maciejkamela/villageApi/issues"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "dependencies": {
-    "jshint": "latest",
-    "nodemon": "latest",
-    "express": "~4.13.1",
     "body-parser": "^1.7.0",
-    "request": "*",
-    "mysql": "^2.5.4",
     "cli-table": "^0.3.0",
+    "express": "~4.13.1",
+    "jshint": "latest",
+    "mysql": "^2.5.4",
+    "nodemon": "latest",
+    "request": "*",
     "restify": "^2.7.0",
+    "sequelize": "^3.16.0",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {

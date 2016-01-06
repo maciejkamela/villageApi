@@ -1,0 +1,17 @@
+{
+  "development": {
+    "username": "maciej",
+    "password": "abc123!",
+    "database": "village",
+    "host": "localhost",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "DATABASE_USERNAME",
+    "password": "DATABASE_PASSWORD",
+    "database": "DATABASE_NAME",
+    "host": "PRODUCTION_DATABASE_URL",
+    "dialect": "postgres",
+    "port": "DATABASE_PORT"
+  }
+}
