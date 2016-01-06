@@ -4,10 +4,10 @@
 module.exports =  function (routes, src) {
     var Table = require('cli-table');
     var table = new Table({ head: ["", "Name", "Path"] });
-    console.log('\nAPI for this service \n');
+    console.log('\nAPI for this service');
     if(src == 'restify')
     {
-        console.log('\n********************************************');
+        console.log('********************************************');
         console.log('\t\tRESTIFY');
         console.log('********************************************\n');
         for (var key in routes) {
@@ -20,7 +20,7 @@ module.exports =  function (routes, src) {
         }
     }
     else
-    {
+    {var table = new Table({ head: ["Method", "Path"] });
         console.log('\n********************************************');
         console.log('\t\tEXPRESS');
         console.log('********************************************\n');
@@ -31,7 +31,7 @@ module.exports =  function (routes, src) {
                 {
                     val = val.route;
                     var _o = {};
-                    _o[val.stack[0].method]  = [val.path, val.path ];
+                    _o[val.stack[0].method]  = [val.path ];
                     table.push(_o);
                 }
             }
