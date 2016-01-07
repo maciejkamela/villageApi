@@ -6,7 +6,8 @@ module.exports =  function (sequelize, DataTypes) {
     var Articles = sequelize.define('artykuly', {
         id: {
             type: DataTypes.INTEGER,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         autor: {
             type: DataTypes.STRING
@@ -23,10 +24,22 @@ module.exports =  function (sequelize, DataTypes) {
         cd: {
             type: DataTypes.DATE
         }
-    });
-    //console.log('dddddddd',Articles.id);
-Articles.findAll().then(function(x){
-        console.log(x[0].dataValues.autor);
+    }, {
+        createdAt: 'cd',
+        updatedAt: false,
+        freezeTableName: true, //domyslnie sequalize zmienia nazwe tabeli na liczbe mnoga, my nie chcemy aby nazwa tabeli zostala zmieniona
+        classMethods: {
+            getSingleArticle: function(id) {
+                return this.findOne({
+                    where: {
+                        id: id
+                    }
+                })
+            },
+            getArticles: function() {
+                return this.findAndCountAll();
+            }
+        }
     });
     return Articles;
 };

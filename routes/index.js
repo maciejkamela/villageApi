@@ -22,6 +22,5 @@
 //w app.j podawac require do kazdego z tych plikow , bo bedzie ich tu wiecej ??? Potrzebne to mi do dokumentacji API
 
 module.exports = {
-    articles:require('./articlesRoute'),
-    test: require('./test')
+    articles:require('./articlesRoute')
 }
