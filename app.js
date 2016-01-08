@@ -8,6 +8,7 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 require('./routes/articlesRoute')(app);
+require('./routes/commentsRoute')(app);
 
 models.sequelize.sync().then(function () {
     var server = app.listen(port, function () {

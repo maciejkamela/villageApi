@@ -13,8 +13,8 @@ module.exports = function () {
         },
         getAllArticle: function (req, res) {
             models.articles.getArticles()
-                .then(function(articles) {
-                   res.json(articles);
+                .then(function (articles) {
+                    res.json(articles);
                 });
         },
         addNewArticle: function (req, res) {
@@ -24,7 +24,6 @@ module.exports = function () {
                 zajawka: req.body.zajawka,
                 artykul: req.body.artykul
             });
-
             newArticle.save()
                 .then(function () {
                     res.json(newArticle);
@@ -32,6 +31,24 @@ module.exports = function () {
                 .catch(function (e) {
                     res.json(e);
                 });
+        },
+        updateArticle: function (req, res) {
+            models.articles.find({
+                where: {
+                    id: req.params.id
+                }
+            }).then(function (article) {
+                if (article) {
+                    article.updateAttributes({
+                        autor: req.body.autor,
+                        tytul: req.body.tytul,
+                        zajawka: req.body.zajawka,
+                        artykul: req.body.artykul
+                    }).then(function (article) {
+                        res.send(article);
+                    })
+                }
+            })
         }
     }
 }();
