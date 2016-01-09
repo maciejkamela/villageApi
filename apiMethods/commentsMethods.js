@@ -3,7 +3,7 @@
  */
 var models = require('../models');
 
-module.exports = function () {
+module.exports = (function () {
     return {
         getSingleComment: function (req, res) {
             models.comments.getSingleComment(req.params.id)
@@ -17,5 +17,5 @@ module.exports = function () {
                     res.json(comments);
                 });
         }
-    }
-}();
+    };
+})();

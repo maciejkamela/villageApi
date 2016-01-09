@@ -3,26 +3,37 @@
  */
 var models = require('../models');
 
-module.exports = function () {
+module.exports = (function () {
     return {
-        getSingleArticle: function (req, res) {
+        getSingleArticle: function (req, res, err) {
+            console.log('dlugosc', req.params.length);
             models.articles.getSingleArticle(req.params.id)
                 .then(function (article) {
-                    res.json(article);
+                    if (!article) {
+                        //throw new Error ('There is no article with id ' + req.params.id);
+                        //console.error(err.stack);
+                        res.status(404).send({status: 'error', error: 'Article not found.'});
+                    } else {
+                        res.json(article);
+                    }
                 });
         },
         getAllArticle: function (req, res) {
             models.articles.getArticles()
                 .then(function (articles) {
-                    res.json(articles);
+                    if (!articles) {
+                        console.log(res.status(402).send({error: 'There is no articles.'}));
+                    } else {
+                        res.json(articles);
+                    }
                 });
         },
         addNewArticle: function (req, res) {
             var newArticle = models.articles.build({
-                autor: req.body.autor,
-                tytul: req.body.tytul,
-                zajawka: req.body.zajawka,
-                artykul: req.body.artykul
+                author: req.body.author,
+                title: req.body.title,
+                intro: req.body.intro,
+                article: req.body.article
             });
             newArticle.save()
                 .then(function () {
@@ -33,22 +44,30 @@ module.exports = function () {
                 });
         },
         updateArticle: function (req, res) {
-            models.articles.find({
-                where: {
-                    id: req.params.id
-                }
-            }).then(function (article) {
-                if (article) {
-                    article.updateAttributes({
-                        autor: req.body.autor,
-                        tytul: req.body.tytul,
-                        zajawka: req.body.zajawka,
-                        artykul: req.body.artykul
-                    }).then(function (article) {
-                        res.send(article);
-                    })
-                }
-            })
+            models.articles.getSingleArticle(req.params.id)
+                .then(function (article) {
+                    if (article) {
+                        article.updateAttributes({
+                            author: req.body.author,
+                            title: req.body.title,
+                            intro: req.body.intro,
+                            article: req.body.article
+                        }).then(function (article) {
+                            res.send(article);
+                        });
+                    }
+                });
+        },
+        getLimitedArticle: function (req, res) {
+            console.log(req.params);
+            models.articles.limitedArticles(req.params.start, req.params.amount, req.params.orderType)
+                .then(function (articles) {
+                    if (!articles) {
+                        console.log(res.status(404).send({error: 'There is no articles.'}));
+                    } else {
+                        res.json(articles);
+                    }
+                });
         }
-    }
-}();
+    };
+})();

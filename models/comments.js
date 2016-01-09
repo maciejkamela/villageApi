@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 module.exports = function (sequelize, DataTypes) {
     var Comments = sequelize.define('comments', {
         id: {
@@ -34,7 +34,7 @@ module.exports = function (sequelize, DataTypes) {
                     where: {
                         id: id
                     }
-                })
+                });
             },
             getAllComments: function () {
                 return this.findAndCountAll();

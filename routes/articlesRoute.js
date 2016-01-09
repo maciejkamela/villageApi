@@ -8,4 +8,5 @@ module.exports = function (app) {
     app.get('/articles', articles.getAllArticle);
     app.post('/articles', articles.addNewArticle);
     app.put('/articles/:id', articles.updateArticle);
+    app.get('/articles/offset/:start/count/:amount/sort/:orderType', articles.getLimitedArticle);
 };

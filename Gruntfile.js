@@ -12,7 +12,8 @@ module.exports = function(grunt) {
                 'Gruntfile.js',
                 'routs/*.js',
                 'app.js',
-                'test.js'
+                'models/*.js',
+                'apiMethods/*.js'
             ],
             options: {
                 jshintrc: '.jshintrc'
