@@ -42,10 +42,9 @@ module.exports = function (sequelize, DataTypes) {
                         ['cd', 'DESC']
                     ]
                 });
-            }
-            ,
+            },
             limitedArticles: function (start, count,orderType) {
-                console.log('limit',start, count);
+                console.log('limit',arguments);
                 return this.findAndCountAll({
                     order: [
                         ['cd', orderType]

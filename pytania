@@ -1,0 +1,7 @@
+1. Jak zrobic get z wieloma parametrami
+app.get('/articles/offset/:start/count/:amount/sort/:field&orderType', articles.getLimitedArticle);
+2. obsluga bledow
+3. jak zrobic opcjonalne parametry w callu
+4. gdzie musze wrzucic
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");

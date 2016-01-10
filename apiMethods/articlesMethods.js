@@ -5,15 +5,16 @@ var models = require('../models');
 
 module.exports = (function () {
     return {
-        getSingleArticle: function (req, res, err) {
-            console.log('dlugosc', req.params.length);
+        getSingleArticle: function (req, res) {
             models.articles.getSingleArticle(req.params.id)
                 .then(function (article) {
-                    if (!article) {
-                        //throw new Error ('There is no article with id ' + req.params.id);
-                        //console.error(err.stack);
-                        res.status(404).send({status: 'error', error: 'Article not found.'});
-                    } else {
+                    if (req.params.id != parseInt(req.params.id, 10)){
+                        res.send({status: 'error', error: 'Id is not an integer.'});
+                    }
+                    else if (!article){
+                        res.send({status: 'error', error: 'Article not found.'});
+                    }
+                    else {
                         res.json(article);
                     }
                 });
@@ -22,7 +23,7 @@ module.exports = (function () {
             models.articles.getArticles()
                 .then(function (articles) {
                     if (!articles) {
-                        console.log(res.status(402).send({error: 'There is no articles.'}));
+                        console.log(res.send({error: 'There is no articles.'}));
                     } else {
                         res.json(articles);
                     }
@@ -59,9 +60,10 @@ module.exports = (function () {
                 });
         },
         getLimitedArticle: function (req, res) {
-            console.log(req.params);
-            models.articles.limitedArticles(req.params.start, req.params.amount, req.params.orderType)
+            console.log('dddd', req.query);
+            models.articles.limitedArticles(req.params.start, req.params.amount,req.params.orderType)
                 .then(function (articles) {
+                    console.log('dddd', req.query);
                     if (!articles) {
                         console.log(res.status(404).send({error: 'There is no articles.'}));
                     } else {
