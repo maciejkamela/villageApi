@@ -9,5 +9,5 @@ module.exports = function (app) {
     app.post('/articles', articles.addNewArticle);
     app.put('/articles/:id', articles.updateArticle);
     app.get('/articles/offset/:start/count/:amount/sort/:orderType', articles.getLimitedArticle);
-
+    app.delete('/articles/:id', articles.deleteSingleArticle);
 };

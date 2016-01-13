@@ -71,5 +71,23 @@ module.exports = (function () {
                     }
                 });
         }
+        ,
+        deleteSingleArticle: function (req, res, next) {
+            //var id = req.params.id;
+            //if(!id) {
+            //    console.log('doopa');
+            //    res.json({status: error,
+            //            message: 'There is no record with id ' + req.params.id });
+            //    next();
+            //    return;
+            //} else {
+            models.articles.getSingleArticle(req.params.id)
+                .then(function (article) {
+                    article.destroy()
+                        .then(function (){
+                            res.json({message: 'Successfully removed record with id ' + req.params.id });
+                        })
+                })
+        }
     };
 })();
