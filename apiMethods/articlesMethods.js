@@ -8,11 +8,11 @@ module.exports = (function () {
         getSingleArticle: function (req, res) {
             models.articles.getSingleArticle(req.params.id)
                 .then(function (article) {
-                    if (req.params.id != parseInt(req.params.id, 10)){
-                        res.send({status: 'error', error: 'Id is not an integer.'});
-                    }
-                    else if (!article){
-                        res.send({status: 'error', error: 'Article not found.'});
+                    if (!article) {
+                        res.send({
+                            status: 'error',
+                            error: '404 - Not found.'
+                        });
                     }
                     else {
                         res.json(article);
@@ -22,14 +22,11 @@ module.exports = (function () {
         getAllArticle: function (req, res) {
             models.articles.getArticles()
                 .then(function (articles) {
-                    if (!articles) {
-                        console.log(res.send({error: 'There is no articles.'}));
-                    } else {
                         res.json(articles);
-                    }
-                });
+                    });
         },
         addNewArticle: function (req, res) {
+console.log(req.params);
             var newArticle = models.articles.build({
                 author: req.body.author,
                 title: req.body.title,
@@ -61,7 +58,7 @@ module.exports = (function () {
         },
         getLimitedArticle: function (req, res) {
             console.log('dddd', req.query);
-            models.articles.limitedArticles(req.params.start, req.params.amount,req.params.orderType)
+            models.articles.limitedArticles(req.params.start, req.params.amount, req.params.orderType)
                 .then(function (articles) {
                     console.log('dddd', req.query);
                     if (!articles) {
@@ -70,8 +67,7 @@ module.exports = (function () {
                         res.json(articles);
                     }
                 });
-        }
-        ,
+        },
         deleteSingleArticle: function (req, res, next) {
             //var id = req.params.id;
             //if(!id) {
@@ -84,10 +80,10 @@ module.exports = (function () {
             models.articles.getSingleArticle(req.params.id)
                 .then(function (article) {
                     article.destroy()
-                        .then(function (){
-                            res.json({message: 'Successfully removed record with id ' + req.params.id });
-                        })
-                })
+                        .then(function () {
+                            res.json({message: 'Successfully removed record with id ' + req.params.id});
+                        });
+                });
         }
     };
 })();
