@@ -1,6 +1,8 @@
 nodemon localhost 3000
 http://localhost:3000/articles/12
 
+http://localhost:3000/articles?offset=2&count=5&sort=DESC
+
 http://www.sitepoint.com/using-node-mysql-javascript-client/
 node route.js
 grunt watch -> to samo co node deamon

@@ -20,6 +20,7 @@ module.exports = (function () {
                 });
         },
         getAllArticle: function (req, res) {
+            console.log(req.query);
             models.articles.getArticles()
                 .then(function (articles) {
                     res.json(articles);
@@ -71,6 +72,7 @@ module.exports = (function () {
             var start = req.params.start,
                 amount = req.params.amount,
                 orderType = req.params.orderType;
+            console.log(req);
             if (!start && !amount && !orderType) {
                 res.json({
                     status: 'error',
@@ -78,7 +80,7 @@ module.exports = (function () {
                 });
                 return;
             } else if (!start && !amount) {
-                models.articles.limitedArticles(null, null, req.params.orderType)
+                models.articles.limitedArticles( null, null, req.params.orderType)
                     .then(function (articles) {
                         res.json(articles);
                     });
