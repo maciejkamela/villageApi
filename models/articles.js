@@ -43,7 +43,7 @@ module.exports = function (sequelize, DataTypes) {
                     ]
                 });
             },
-            limitedArticles: function (start, count,orderType) {
+            limitedArticles: function (start, count, orderType) {
                 console.log('limit',arguments);
                 return this.findAndCountAll({
                     order: [

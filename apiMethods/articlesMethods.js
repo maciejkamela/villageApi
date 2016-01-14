@@ -22,24 +22,35 @@ module.exports = (function () {
         getAllArticle: function (req, res) {
             models.articles.getArticles()
                 .then(function (articles) {
-                        res.json(articles);
-                    });
+                    res.json(articles);
+                });
         },
         addNewArticle: function (req, res) {
-console.log(req.params);
-            var newArticle = models.articles.build({
-                author: req.body.author,
-                title: req.body.title,
-                intro: req.body.intro,
-                article: req.body.article
-            });
-            newArticle.save()
-                .then(function () {
-                    res.json(newArticle);
-                })
-                .catch(function (e) {
-                    res.json(e);
+            var author = req.body.author,
+                title = req.body.title,
+                intro = req.body.intro,
+                article = req.body.article;
+            if (!author || !title || !intro || !article) {
+                res.json({
+                    status: 'error',
+                    msg: '400 - Bad request.'
                 });
+                return;
+            } else {
+                var newArticle = models.articles.build({
+                    author: req.body.author,
+                    title: req.body.title,
+                    intro: req.body.intro,
+                    article: req.body.article
+                });
+                newArticle.save()
+                    .then(function () {
+                        res.json(newArticle);
+                    })
+                    .catch(function (e) {
+                        res.json(e);
+                    });
+            }
         },
         updateArticle: function (req, res) {
             models.articles.getSingleArticle(req.params.id)
@@ -56,17 +67,28 @@ console.log(req.params);
                     }
                 });
         },
-        getLimitedArticle: function (req, res) {
-            console.log('dddd', req.query);
-            models.articles.limitedArticles(req.params.start, req.params.amount, req.params.orderType)
-                .then(function (articles) {
-                    console.log('dddd', req.query);
-                    if (!articles) {
-                        console.log(res.status(404).send({error: 'There is no articles.'}));
-                    } else {
-                        res.json(articles);
-                    }
+        getLimitedArticle: function (req, res) { //toDo
+            var start = req.params.start,
+                amount = req.params.amount,
+                orderType = req.params.orderType;
+            if (!start && !amount && !orderType) {
+                res.json({
+                    status: 'error',
+                    msg: '400 - Bad request.'
                 });
+                return;
+            } else if (!start && !amount) {
+                models.articles.limitedArticles(null, null, req.params.orderType)
+                    .then(function (articles) {
+                        res.json(articles);
+                    });
+            }
+            else {
+                models.articles.limitedArticles(req.params.start, req.params.amount, req.params.orderType)
+                    .then(function (articles) {
+                        res.json(articles);
+                    });
+            }
         },
         deleteSingleArticle: function (req, res, next) {
             //var id = req.params.id;
