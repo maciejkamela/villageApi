@@ -2,11 +2,12 @@
  * Created by camel on 2016-01-06.
  */
 var models = require('../models');
-
+    require('../supportMethods/modelMethods');
+var supportModel = new MyModel(articles);
 module.exports = (function () {
     return {
         getSingleArticle: function (req, res) {
-            models.articles.getSingleRecord(req.params.id)
+            supportModel.getSingleRecord(req.params.id)
                 .then(function (article) {
                     if (!article) {
                         res.send({
