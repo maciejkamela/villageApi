@@ -6,7 +6,7 @@ var models = require('../models');
 module.exports = (function () {
     return {
         getSingleArticle: function (req, res) {
-            models.articles.getSingleArticle(req.params.id)
+            models.articles.getSingleRecord(req.params.id)
                 .then(function (article) {
                     if (!article) {
                         res.send({
@@ -19,9 +19,12 @@ module.exports = (function () {
                     }
                 });
         },
-        getAllArticle: function (req, res) {
+        getAllArticles: function (req, res) {
             console.log(req.query);
-            models.articles.getArticles()
+            var offset = req.query.offset || null,
+                count = req.query.count || null,
+                sort = req.query.sort || 'DESC';
+            models.articles.getRecords(offset, count, sort)
                 .then(function (articles) {
                     res.json(articles);
                 });
@@ -36,7 +39,6 @@ module.exports = (function () {
                     status: 'error',
                     msg: '400 - Bad request.'
                 });
-                return;
             } else {
                 var newArticle = models.articles.build({
                     author: req.body.author,
@@ -54,7 +56,7 @@ module.exports = (function () {
             }
         },
         updateArticle: function (req, res) {
-            models.articles.getSingleArticle(req.params.id)
+            models.articles.getSingleRecord(req.params.id)
                 .then(function (article) {
                     if (article) {
                         article.updateAttributes({
@@ -65,48 +67,29 @@ module.exports = (function () {
                         }).then(function (article) {
                             res.send(article);
                         });
+                    } else {
+                        res.json({
+                            status: 'error',
+                            msg: '404 - Not found.'
+                        });
                     }
                 });
         },
-        getLimitedArticle: function (req, res) { //toDo
-            var start = req.params.start,
-                amount = req.params.amount,
-                orderType = req.params.orderType;
-            console.log(req);
-            if (!start && !amount && !orderType) {
-                res.json({
-                    status: 'error',
-                    msg: '400 - Bad request.'
-                });
-                return;
-            } else if (!start && !amount) {
-                models.articles.limitedArticles( null, null, req.params.orderType)
-                    .then(function (articles) {
-                        res.json(articles);
-                    });
-            }
-            else {
-                models.articles.limitedArticles(req.params.start, req.params.amount, req.params.orderType)
-                    .then(function (articles) {
-                        res.json(articles);
-                    });
-            }
-        },
-        deleteSingleArticle: function (req, res, next) {
-            //var id = req.params.id;
-            //if(!id) {
-            //    console.log('doopa');
-            //    res.json({status: error,
-            //            message: 'There is no record with id ' + req.params.id });
-            //    next();
-            //    return;
-            //} else {
-            models.articles.getSingleArticle(req.params.id)
+        deleteSingleArticle: function (req, res) {
+            models.articles.getSingleRecord(req.params.id)
                 .then(function (article) {
-                    article.destroy()
-                        .then(function () {
-                            res.json({message: 'Successfully removed record with id ' + req.params.id});
+                    if (article) {
+                        article.destroy()
+                            .then(function () {
+                                res.json({status: 'success',
+                                    msg: 'Successfully removed record with id ' + req.params.id});
+                            });
+                    } else {
+                        res.json({
+                            status: 'error',
+                            msg: '404 - Not found.'
                         });
+                    }
                 });
         }
     };

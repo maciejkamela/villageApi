@@ -33,17 +33,10 @@ module.exports = function (sequelize, DataTypes) {
         updatedAt: false,
         freezeTableName: true,
         classMethods: {// te metody trzeba by przeniesc gdzies do jakiegos supportModel, ale jak je wywolywac w poszczegolnych routach? this=model
-            getSingleArticle: function (id) {
+            getSingleRecord: function (id) {
                 return this.findByPrimary(id);
             },
-            getArticles: function () {
-                return this.findAndCountAll({
-                    order: [
-                        ['cd', 'DESC']
-                    ]
-                });
-            },
-            limitedArticles: function (start, count, orderType) {
+            getRecords: function (start, count, orderType) {
                 console.log('limit',arguments);
                 return this.findAndCountAll({
                     order: [
