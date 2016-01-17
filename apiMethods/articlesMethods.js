@@ -2,8 +2,8 @@
  * Created by camel on 2016-01-06.
  */
 var models = require('../models');
-    require('../supportMethods/modelMethods');
-var supportModel = new MyModel(articles);
+    var MyModel = require('../supportMethods/modelMethods');
+var supportModel = new MyModel('Articles');
 module.exports = (function () {
     return {
         getSingleArticle: function (req, res) {
