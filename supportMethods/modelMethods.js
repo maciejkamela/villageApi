@@ -16,7 +16,6 @@ MyModel.prototype.getRecords = function (start, count, orderType) {
     });
 };
 MyModel.prototype.getSingleRecord = function (id) {
-    console.log('modellll',this.model);
     return this.model.findByPrimary(id);
 };
 module.exports = MyModel;

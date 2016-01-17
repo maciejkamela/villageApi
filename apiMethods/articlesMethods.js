@@ -3,7 +3,8 @@
  */
 var models = require('../models');
     var MyModel = require('../supportMethods/modelMethods');
-var supportModel = new MyModel('Articles');
+var supportModel = new MyModel(models.articles);
+
 module.exports = (function () {
     return {
         getSingleArticle: function (req, res) {
@@ -25,7 +26,7 @@ module.exports = (function () {
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC';
-            models.articles.getRecords(offset, count, sort)
+            supportModel.getRecords(offset, count, sort)
                 .then(function (articles) {
                     res.json(articles);
                 });
@@ -57,7 +58,7 @@ module.exports = (function () {
             }
         },
         updateArticle: function (req, res) {
-            models.articles.getSingleRecord(req.params.id)
+            supportModel.getSingleRecord(req.params.id)
                 .then(function (article) {
                     if (article) {
                         article.updateAttributes({
@@ -77,7 +78,7 @@ module.exports = (function () {
                 });
         },
         deleteSingleArticle: function (req, res) {
-            models.articles.getSingleRecord(req.params.id)
+            supportModel.getSingleRecord(req.params.id)
                 .then(function (article) {
                     if (article) {
                         article.destroy()

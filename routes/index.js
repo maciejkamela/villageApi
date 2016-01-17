@@ -1,3 +1,4 @@
 module.exports = {
-    articles: require('./articlesRoute')
+    articles: require('./articlesRoute'),
+    comments: require('./commentsRoute')
 };
