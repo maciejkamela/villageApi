@@ -43,10 +43,10 @@ module.exports = (function () {
                 });
             } else {
                 var newArticle = models.articles.build({
-                    author: req.body.author,
-                    title: req.body.title,
-                    intro: req.body.intro,
-                    article: req.body.article
+                    author: author.trim(),
+                    title: title.trim(),
+                    intro: intro.trim(),
+                    article: article.trim()
                 });
                 newArticle.save()
                     .then(function () {
@@ -62,10 +62,10 @@ module.exports = (function () {
                 .then(function (article) {
                     if (article) {
                         article.updateAttributes({
-                            author: req.body.author,
-                            title: req.body.title,
-                            intro: req.body.intro,
-                            article: req.body.article
+                            author: req.body.author.trim(),
+                            title: req.body.title.trim(),
+                            intro: req.body.intro.trim(),
+                            article: req.body.article.trim()
                         }).then(function (article) {
                             res.send(article);
                         });

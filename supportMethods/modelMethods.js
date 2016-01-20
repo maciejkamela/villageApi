@@ -1,11 +1,11 @@
 /**
  * Created by camel on 2016-01-16.
  */
-function MyModel(model) {
+function NewModel(model) {
     this.model = model;
 }
 
-MyModel.prototype.getRecords = function (start, count, orderType) {
+NewModel.prototype.getRecords = function (start, count, orderType) {
     console.log('limit',arguments);
     return this.model.findAndCountAll({
         order: [
@@ -15,7 +15,7 @@ MyModel.prototype.getRecords = function (start, count, orderType) {
         limit:count
     });
 };
-MyModel.prototype.getSingleRecord = function (id) {
+NewModel.prototype.getSingleRecord = function (id) {
     return this.model.findByPrimary(id);
 };
-module.exports = MyModel;
+module.exports = NewModel;
