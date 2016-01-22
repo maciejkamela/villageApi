@@ -23,8 +23,8 @@ CHANGE COLUMN `zajawka` `intro` TEXT NOT NULL,
 CHANGE COLUMN `artykul` `article` TEXT NOT NULL;
 
 ALTER TABLE announcements  ALTER cd DROP DEFAULT;
-ALTER TABLE announcements
-CHANGE COLUMN ogloszenia announcement;
+ALTER TABLE `kolaczkowo`.`announcements`
+CHANGE COLUMN `ogloszenia` `announcement` VARCHAR(700) NOT NULL ;
 
 ALTER TABLE commercials  ALTER date DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`commercials`
