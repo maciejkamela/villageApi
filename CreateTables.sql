@@ -27,7 +27,7 @@ CREATE TABLE comments_articles (
   article_id INT(11)      NOT NULL,
   cd         DATETIME     NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (id),
-  FOREIGN KEY (article_id) REFERENCES artykuly (id),
+  FOREIGN KEY (article_id) REFERENCES articles (id),
   FOREIGN KEY (author) REFERENCES users (id)
 )
   DEFAULT CHARSET = latin2;
@@ -42,7 +42,7 @@ CREATE TABLE comments_galleries (
   gallery_id INT,
   cd         DATETIME     NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (id),
-  FOREIGN KEY (gallery_id) REFERENCES galeria (id),
+  FOREIGN KEY (gallery_id) REFERENCES gallery (id),
   FOREIGN KEY (author) REFERENCES users (id)
 )
   DEFAULT CHARSET = latin2;
@@ -62,7 +62,7 @@ CREATE TABLE comments_articles (
   article_id INT NOT NULL,
   comment_id INT NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (article_id) REFERENCES artykuly (id),
+  FOREIGN KEY (article_id) REFERENCES articles (id),
   FOREIGN KEY (comment_id) REFERENCES comments (id)
 )
   DEFAULT CHARSET = latin2;
@@ -72,7 +72,7 @@ CREATE TABLE comments_galleries (
   gallery_id INT NOT NULL,
   comment_id INT NOT NULL,
   PRIMARY KEY (id),
-  FOREIGN KEY (gallery_id) REFERENCES galeria (id),
+  FOREIGN KEY (gallery_id) REFERENCES gallery (id),
   FOREIGN KEY (comment_id) REFERENCES comments (id)
 )
   DEFAULT CHARSET = latin2;

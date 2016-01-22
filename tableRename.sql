@@ -37,6 +37,9 @@ CHANGE COLUMN `miasto` `city` VARCHAR(255) NOT NULL DEFAULT '',
 CHANGE COLUMN `telefon` `phone` VARCHAR(255) NOT NULL DEFAULT '',
 CHANGE COLUMN `opis` `description` TEXT NOT NULL;
 
+ALTER TABLE `kolaczkowo`.`comments`
+CHANGE COLUMN `date` `cd` DATETIME NOT NULL ;
+
 ALTER TABLE gallery  ALTER cd DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`gallery`
 CHANGE COLUMN `opis` `description` VARCHAR(255) NOT NULL DEFAULT '',
