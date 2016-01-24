@@ -7,7 +7,7 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
         id_parent: {
-          type:DataTypes.INTEGER
+            type: DataTypes.INTEGER
         },
         nick: {
             type: DataTypes.STRING
@@ -25,21 +25,9 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER
         }
     }, {
-        createdAt: 'date',
+        createdAt: 'cd',
         updatedAt: false,
-        freezeTableName: true, //domyslnie sequalize zmienia nazwe tabeli na liczbe mnoga, my nie chcemy aby nazwa tabeli zostala zmieniona
-        classMethods: {
-            getSingleComment: function (id) {
-                return this.findOne({
-                    where: {
-                        id: id
-                    }
-                });
-            },
-            getAllComments: function () {
-                return this.findAndCountAll();
-            }
-        }
+        freezeTableName: true
     });
     return Comments;
 };

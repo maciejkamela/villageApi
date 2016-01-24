@@ -62,3 +62,17 @@ mongo:
  https://scotch.io/tutorials/build-a-restful-api-using-node-and-express-4
 
  http://localhost:3000/movies?title=Serpico
+
+
+ sprawdz czy jest tak samo jesli nie to zapisz odpowiedniego SQL!
+ CREATE TABLE `comments` (
+   `id` int(11) NOT NULL AUTO_INCREMENT,
+   `id_parent` int(11) DEFAULT NULL,
+   `nick` varchar(100) NOT NULL,
+   `title` varchar(150) NOT NULL,
+   `comment` text NOT NULL,
+   `plus` int(11) DEFAULT NULL,
+   `minus` int(11) DEFAULT NULL,
+   `cd` datetime NOT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin2

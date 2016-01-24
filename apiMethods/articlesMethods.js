@@ -1,9 +1,9 @@
 /**
  * Created by camel on 2016-01-06.
  */
-var models = require('../models');
-    var MyModel = require('../supportMethods/modelMethods');
-var supportModel = new MyModel(models.articles);
+var models = require('../models'),
+    MyModel = require('../supportMethods/modelMethods'),
+    supportModel = new MyModel(models.articles);
 
 module.exports = (function () {
     return {
@@ -83,8 +83,10 @@ module.exports = (function () {
                     if (article) {
                         article.destroy()
                             .then(function () {
-                                res.json({status: 'success',
-                                    msg: 'Successfully removed record with id ' + req.params.id});
+                                res.json({
+                                    status: 'success',
+                                    msg: 'Successfully removed record with id ' + req.params.id
+                                });
                             });
                     } else {
                         res.json({

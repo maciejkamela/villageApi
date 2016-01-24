@@ -39,6 +39,9 @@ CHANGE COLUMN `opis` `description` TEXT NOT NULL;
 
 ALTER TABLE `kolaczkowo`.`comments`
 CHANGE COLUMN `date` `cd` DATETIME NOT NULL ;
+ALTER TABLE `kolaczkowo`.`comments`
+CHANGE COLUMN `plus` `plus` INT(11) NULL ,
+CHANGE COLUMN `minus` `minus` INT(11) NULL ;
 
 ALTER TABLE gallery  ALTER cd DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`gallery`
@@ -68,3 +71,7 @@ CHANGE COLUMN `komentarz` `comment` TEXT NOT NULL;
 ALTER TABLE visitors  ALTER cd DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`wishes`
 CHANGE COLUMN `zyczenia` `description` TEXT NOT NULL;
+
+# Usuniecie zbednej kolumny id_parent
+ALTER TABLE comments
+DROP COLUMN id_parent;
