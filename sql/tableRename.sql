@@ -40,8 +40,9 @@ CHANGE COLUMN `opis` `description` TEXT NOT NULL;
 ALTER TABLE `kolaczkowo`.`comments`
 CHANGE COLUMN `date` `cd` DATETIME NOT NULL ;
 ALTER TABLE `kolaczkowo`.`comments`
-CHANGE COLUMN `plus` `plus` INT(11) NULL ,
-CHANGE COLUMN `minus` `minus` INT(11) NULL ;
+CHANGE COLUMN `id_parent` `id_parent` INT(11) NULL,
+CHANGE COLUMN `plus` `plus` INT(11) NULL,
+CHANGE COLUMN `minus` `minus` INT(11) NULL;
 
 ALTER TABLE gallery  ALTER cd DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`gallery`

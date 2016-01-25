@@ -76,3 +76,21 @@ mongo:
    `cd` datetime NOT NULL,
    PRIMARY KEY (`id`)
  ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin2
+
+ oryginalny create comments:
+CREATE TABLE `comments` (
+  `id`        INT(11)      NOT NULL AUTO_INCREMENT,
+  `id_parent` INT(11)               DEFAULT NULL,
+  `nick`      VARCHAR(100) NOT NULL,
+  `title`     VARCHAR(150) NOT NULL,
+  `comment`   TEXT         NOT NULL,
+  `plus`      INT(11)               DEFAULT NULL,
+  `minus`     INT(11)               DEFAULT NULL,
+  `cd`        DATETIME     NOT NULL,
+  PRIMARY KEY (`id`)
+)
+  ENGINE = InnoDB
+  AUTO_INCREMENT = 16
+  DEFAULT CHARSET = latin2
+
+  wiec usun default nulla i nullable z plusa i minusa

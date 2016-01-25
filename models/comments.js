@@ -19,10 +19,12 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.TEXT
         },
         plus: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: null
         },
         minus: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: null
         }
     }, {
         createdAt: 'cd',

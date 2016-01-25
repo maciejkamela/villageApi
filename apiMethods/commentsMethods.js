@@ -31,15 +31,17 @@ module.exports = (function () {
                     res.json(comments);
                 });
         },
+        /**
+         * Plus and minus have null value
+         * Needs to run sql script in order to change plus, minus and id_parent fields to be nullable
+         * @param req
+         * @param res
+         */
         addNewComment: function (req, res) {
             var id_parent = req.body.id_parent,
                 nick = req.body.nick,
                 title = req.body.title,
                 comment = req.body.comment;
-            //dodajac nowy comm plus i minus powinny byc zawsze nullem
-                //,
-                //plus = req.body.plus,
-                //minus = req.body.minus;
             if (!nick || !title || !comment) {
                 res.json({
                     status: 'error',
@@ -47,14 +49,10 @@ module.exports = (function () {
                 });
             } else {
                 var newComment = models.comments.build({
-                    id_parent: id_parent || 0,
+                    id_parent: id_parent || null,
                     nick: nick.trim(),
                     title: title.trim(),
                     comment: comment.trim()
-                    //,
-                    //w sumie to plus i minus nie sa tu potrzebne jesli w bazie ustawione jest ze moga byc nullami
-                    //plus: null,
-                    //minus: null
                 });
                 newComment.save()
                     .then(function () {
