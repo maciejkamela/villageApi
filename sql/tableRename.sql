@@ -71,8 +71,13 @@ CHANGE COLUMN `nazwisko` `last_name` VARCHAR(50) NOT NULL DEFAULT '';
 ALTER TABLE visitors  ALTER cd DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`visitors`
 CHANGE COLUMN `komentarz` `comment` TEXT NOT NULL;
-
 ALTER TABLE visitors  ALTER cd DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`wishes`
 CHANGE COLUMN `zyczenia` `description` TEXT NOT NULL;
+
+ALTER TABLE `kolaczkowo`.`users`
+CHANGE COLUMN `status` `status` TINYINT(2) NOT NULL ,
+CHANGE COLUMN `admin` `admin` TINYINT(2) NOT NULL ,
+ADD COLUMN `cd` DATETIME NOT NULL AFTER `ip`;
+
 
