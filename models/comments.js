@@ -7,7 +7,12 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
         id_parent: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: null
+        },
+        user_id: {
+            type: DataTypes.INTEGER,
+            defaultValue: null
         },
         nick: {
             type: DataTypes.STRING

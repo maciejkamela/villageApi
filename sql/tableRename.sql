@@ -43,6 +43,9 @@ ALTER TABLE `kolaczkowo`.`comments`
 CHANGE COLUMN `id_parent` `id_parent` INT(11) NULL,
 CHANGE COLUMN `plus` `plus` INT(11) NULL,
 CHANGE COLUMN `minus` `minus` INT(11) NULL;
+ALTER TABLE `kolaczkowo`.`comments`
+ADD COLUMN `user_id` INT NULL AFTER `id_parent`;
+
 
 ALTER TABLE gallery  ALTER cd DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`gallery`
@@ -73,6 +76,3 @@ ALTER TABLE visitors  ALTER cd DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`wishes`
 CHANGE COLUMN `zyczenia` `description` TEXT NOT NULL;
 
-# Usuniecie zbednej kolumny id_parent
-ALTER TABLE comments
-DROP COLUMN id_parent;

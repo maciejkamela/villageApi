@@ -39,6 +39,7 @@ module.exports = (function () {
          */
         addNewComment: function (req, res) {
             var id_parent = req.body.id_parent,
+                user_id =  req.body.user_id,
                 nick = req.body.nick,
                 title = req.body.title,
                 comment = req.body.comment;
@@ -49,7 +50,8 @@ module.exports = (function () {
                 });
             } else {
                 var newComment = models.comments.build({
-                    id_parent: id_parent || null,
+                    id_parent: id_parent,
+                    user_id: user_id,
                     nick: nick.trim(),
                     title: title.trim(),
                     comment: comment.trim()
@@ -73,13 +75,6 @@ module.exports = (function () {
             supportModel.getSingleRecord(req.params.id)
                 .then(function (updatedComment) {
                     if (updatedComment) {
-                        //if (!nick || !title || !comment) {
-                        //    res.json({
-                        //        status: 'error',
-                        //        msg: '400 - Bad request.'
-                        //    });
-                        //    return;
-                        //}
                         updatedComment.updateAttributes({
                             id_parent: id_parent || 0,
                             nick: nick,
