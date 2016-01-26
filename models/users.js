@@ -40,6 +40,7 @@ module.exports = function (sequelize, DataTypes) {
         updatedAt: false,
         freezeTableName: true
     });
+    //this.Users.hasMany(this.comments)
     return Users;
 };
 

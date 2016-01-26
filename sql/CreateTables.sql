@@ -16,48 +16,64 @@ alter table promotor_photos ENGINE = InnoDB;
 alter table users ENGINE = InnoDB;
 alter table zyczenia ENGINE = InnoDB;
 
+-- ALTER TABLE activation ENGINE = InnoDB;
+-- ALTER TABLE articles ENGINE = InnoDB;
+-- ALTER TABLE comments ENGINE = InnoDB;
+-- ALTER TABLE comments_articles ENGINE = InnoDB;
+-- ALTER TABLE comments_galleries ENGINE = InnoDB;
+-- ALTER TABLE gallery ENGINE = InnoDB;
+-- ALTER TABLE gallery_section ENGINE = InnoDB;
+-- ALTER TABLE visitors ENGINE = InnoDB;
+-- ALTER TABLE commercials ENGINE = InnoDB;
+-- ALTER TABLE announcements ENGINE = InnoDB;
+-- ALTER TABLE timetable ENGINE = InnoDB;
+-- ALTER TABLE promotor_articles ENGINE = InnoDB;
+-- ALTER TABLE promotor_photos ENGINE = InnoDB;
+-- ALTER TABLE users ENGINE = InnoDB;
+-- ALTER TABLE wishes ENGINE = InnoDB;
+
 # Nowe tabele dla komentarzy artykulow i zdjec
-CREATE TABLE comments_articles (
-  id         INT                   AUTO_INCREMENT,
-  author     INT          NOT NULL,
-  comment    VARCHAR(255) NOT NULL,
-  plus       INT,
-  minus      INT,
-  response   VARCHAR(255),
-  article_id INT(11)      NOT NULL,
-  cd         DATETIME     NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (id),
-  FOREIGN KEY (article_id) REFERENCES articles (id),
-  FOREIGN KEY (author) REFERENCES users (id)
-)
-  DEFAULT CHARSET = latin2;
-
-CREATE TABLE comments_galleries (
-  id         INT                   AUTO_INCREMENT,
-  author     INT          NOT NULL,
-  comment    VARCHAR(255) NOT NULL,
-  plus       INT,
-  minus      INT,
-  response   VARCHAR(255),
-  gallery_id INT,
-  cd         DATETIME     NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (id),
-  FOREIGN KEY (gallery_id) REFERENCES gallery (id),
-  FOREIGN KEY (author) REFERENCES users (id)
-)
-  DEFAULT CHARSET = latin2;
-
-CREATE TABLE articles_2_galleries (
-  id INT      NOT NULL PRIMARY KEY,
-  CONSTRAINT fk_comm_articles FOREIGN KEY (id) REFERENCES comments_articles (id),
-  CONSTRAINT fk_comm_galleries FOREIGN KEY (id) REFERENCES comments_galleries (id),
-  cd DATETIME NOT NULL
-)
-  DEFAULT CHARSET = latin2;
+-- CREATE TABLE comments_articles (
+--   id         INT                   AUTO_INCREMENT,
+--   author     INT          NOT NULL,
+--   comment    VARCHAR(255) NOT NULL,
+--   plus       INT,
+--   minus      INT,
+--   response   VARCHAR(255),
+--   article_id INT(11)      NOT NULL,
+--   cd         DATETIME     NOT NULL DEFAULT '0000-00-00 00:00:00',
+--   PRIMARY KEY (id),
+--   FOREIGN KEY (article_id) REFERENCES articles (id),
+--   FOREIGN KEY (author) REFERENCES users (id)
+-- )
+--   DEFAULT CHARSET = latin2;
+--
+-- CREATE TABLE comments_galleries (
+--   id         INT                   AUTO_INCREMENT,
+--   author     INT          NOT NULL,
+--   comment    VARCHAR(255) NOT NULL,
+--   plus       INT,
+--   minus      INT,
+--   response   VARCHAR(255),
+--   gallery_id INT,
+--   cd         DATETIME     NOT NULL DEFAULT '0000-00-00 00:00:00',
+--   PRIMARY KEY (id),
+--   FOREIGN KEY (gallery_id) REFERENCES gallery (id),
+--   FOREIGN KEY (author) REFERENCES users (id)
+-- )
+--   DEFAULT CHARSET = latin2;
+--
+-- CREATE TABLE articles_2_galleries (
+--   id INT      NOT NULL PRIMARY KEY,
+--   CONSTRAINT fk_comm_articles FOREIGN KEY (id) REFERENCES comments_articles (id),
+--   CONSTRAINT fk_comm_galleries FOREIGN KEY (id) REFERENCES comments_galleries (id),
+--   cd DATETIME NOT NULL
+-- )
+--   DEFAULT CHARSET = latin2;
 
 # albo, trzymam wszystkie komentarze w tabeli comments, a te dwie trzymaja relacje
 # do artykulu/galerii i odpowiedniego komentarza
-CREATE TABLE comments_articles (
+CREATE TABLE commented_articles (
   id         INT AUTO_INCREMENT,
   article_id INT NOT NULL,
   comment_id INT NOT NULL,
@@ -67,7 +83,7 @@ CREATE TABLE comments_articles (
 )
   DEFAULT CHARSET = latin2;
 
-CREATE TABLE comments_galleries (
+CREATE TABLE commented_pictures (
   id         INT AUTO_INCREMENT,
   gallery_id INT NOT NULL,
   comment_id INT NOT NULL,

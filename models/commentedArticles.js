@@ -3,7 +3,7 @@
  */
 'use strict';
 module.exports = function (sequelize, DataTypes) {
-    var CommentedArticles = sequelize.define('comments_articles', {
+    var CommentedArticles = sequelize.define('commented_articles', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -11,17 +11,13 @@ module.exports = function (sequelize, DataTypes) {
         },
         article_id: {
             type: DataTypes.INTEGER,
-            references: {
-                model: 'Articles',
-                key: 'id'
-            }
+            model: 'articles',
+            key: 'id'
         },
         comment_id: {
             type: DataTypes.INTEGER,
-            references: {
-                model: 'Comments',
-                key: 'id'
-            }
+            model: 'comments',
+            key: 'id'
         }
     }, {
         updatedAt: false,
@@ -30,5 +26,3 @@ module.exports = function (sequelize, DataTypes) {
     return CommentedArticles;
 
 };
-
-
