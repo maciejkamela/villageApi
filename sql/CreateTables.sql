@@ -3,8 +3,8 @@ use kolaczkowo;
 alter table aktywacja ENGINE = InnoDB;
 alter table artykuly ENGINE = InnoDB;
 alter table comments ENGINE = InnoDB;
-alter table comments_articles ENGINE = InnoDB;
-alter table comments_galleries ENGINE = InnoDB;
+alter table commented_articles ENGINE = InnoDB;
+alter table commented_pictures ENGINE = InnoDB;
 alter table galeria ENGINE = InnoDB;
 alter table galeria_dzialy ENGINE = InnoDB;
 alter table ksiega ENGINE = InnoDB;
@@ -92,3 +92,5 @@ CREATE TABLE commented_pictures (
   FOREIGN KEY (comment_id) REFERENCES comments (id)
 )
   DEFAULT CHARSET = latin2;
+
+drop table commented_articles;

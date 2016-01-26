@@ -40,7 +40,7 @@ module.exports = function (sequelize, DataTypes) {
         updatedAt: false,
         freezeTableName: true
     });
-    //this.Users.hasMany(this.comments)
+    //Users.hasMany(Comments, {foreignKey: 'id'});
     return Users;
 };
 

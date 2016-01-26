@@ -11,18 +11,19 @@ module.exports = function (sequelize, DataTypes) {
         },
         article_id: {
             type: DataTypes.INTEGER,
-            model: 'articles',
-            key: 'id'
+            references: 'articles',
+            referencesKey: 'id',
+            allowNull: false
         },
         comment_id: {
             type: DataTypes.INTEGER,
-            model: 'comments',
-            key: 'id'
+            references: 'comments',
+            referencesKey: 'id',
+            allowNull: false
         }
     }, {
         updatedAt: false,
         freezeTableName: true
     });
     return CommentedArticles;
-
 };

@@ -1,4 +1,5 @@
 'use strict';
+var models = require('../models/users');
 module.exports = function (sequelize, DataTypes) {
     var Comments = sequelize.define('comments', {
         id: {
@@ -36,6 +37,7 @@ module.exports = function (sequelize, DataTypes) {
         updatedAt: false,
         freezeTableName: true
     });
+    //Comments.belongsTo(models, {foreignKey: 'user_id'});
     return Comments;
 };
 
