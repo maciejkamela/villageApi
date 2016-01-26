@@ -26,8 +26,23 @@ module.exports = (function () {
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC';
-            supportModel.getRecords(offset, count, sort)
+
+            console.log("MODEL", models.users);
+
+            models.comments.findAndCountAll({
+                include: [models.users],
+                order: [
+                    ['cd', sort]
+                ],
+                offset:0,
+                limit:count
+            })
                 .then(function (comments) {
+
+                    for (var i in comments) {
+                        console.log(comments[i].User);
+                    }
+
                     res.json(comments);
                 });
         },
