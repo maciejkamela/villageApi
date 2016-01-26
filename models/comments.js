@@ -34,7 +34,14 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         createdAt: 'cd',
         updatedAt: false,
-        freezeTableName: true
+        freezeTableName: true,
+        classMethods: {
+            associate: function (models) {
+                this.belongsTo(models.users, {
+                    foreignKey: 'user_id'
+                });
+            }
+        }
     });
     return Comments;
 };

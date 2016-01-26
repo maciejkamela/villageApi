@@ -38,7 +38,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         createdAt: 'cd',
         updatedAt: false,
-        freezeTableName: true
+        freezeTableName: true,
     });
     //this.Users.hasMany(this.comments)
     return Users;
