@@ -2,9 +2,6 @@
  * Created by camel on 2016-01-06.
  */
 'use strict';
-var models = require('../models/comments');
-var MyModel = require('../supportMethods/modelMethods');
-var supportModel = new MyModel(models.comments);
 module.exports = function (sequelize, DataTypes) {
     var Articles = sequelize.define('articles', {
         id: {
@@ -32,6 +29,5 @@ module.exports = function (sequelize, DataTypes) {
         updatedAt: false,
         freezeTableName: true
     });
-    //Articles.hasMany(models);
     return Articles;
 };

@@ -26,23 +26,19 @@ module.exports = (function () {
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC';
-
             console.log("MODEL", models.users);
-
             models.comments.findAndCountAll({
                 include: [models.users],
                 order: [
                     ['cd', sort]
                 ],
-                offset:0,
-                limit:count
+                offset: offset,
+                limit: count
             })
                 .then(function (comments) {
-
                     for (var i in comments) {
-                        console.log(comments[i].User);
+                        //console.log(comments[i].User);
                     }
-
                     res.json(comments);
                 });
         },
@@ -54,7 +50,7 @@ module.exports = (function () {
          */
         addNewComment: function (req, res) {
             var id_parent = req.body.id_parent,
-                user_id =  req.body.user_id,
+                user_id = req.body.user_id,
                 nick = req.body.nick,
                 title = req.body.title,
                 comment = req.body.comment;
