@@ -2,7 +2,7 @@
   "development": {
     "username": "maciej",
     "password": "abc123!",
-    "database": "kolaczkowo",
+    "database": "test",
     "host": "localhost",
     "dialect": "mysql"
   },

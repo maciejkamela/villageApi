@@ -73,6 +73,7 @@ ALTER TABLE visitors  ALTER cd DROP DEFAULT;
 ALTER TABLE `kolaczkowo`.`visitors`
 CHANGE COLUMN `komentarz` `comment` TEXT NOT NULL;
 ALTER TABLE visitors  ALTER cd DROP DEFAULT;
+
 ALTER TABLE `kolaczkowo`.`wishes`
 CHANGE COLUMN `zyczenia` `description` TEXT NOT NULL;
 
