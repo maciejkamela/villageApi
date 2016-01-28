@@ -1,0 +1,4 @@
+1. Migracje muszą byc odpalone na wyłaczonej aplikacji (inaczej stworza sie modele)
+2. Przed wykonaniem migracji wykonaj skrypt zmieniajcy silnik bazy danych
+3. Opdal migracje
+4. Odpal nodemona
