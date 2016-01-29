@@ -36,9 +36,9 @@ module.exports = (function () {
                 limit: count
             })
                 .then(function (comments) {
-                    for (var i in comments) {
-                        //console.log(comments[i].User);
-                    }
+                    //for (var i in comments) {
+                    //    //console.log(comments[i].User);
+                    //}
                     res.json(comments);
                 });
         },

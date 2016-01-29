@@ -27,7 +27,16 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         createdAt: 'cd',
         updatedAt: false,
-        freezeTableName: true
+        freezeTableName: true,
+        classMethods: {
+            associate: function (models) {
+                this.belongsToMany(models.comments, {
+                    through: models.commentedArticles,
+                    as: 'comments',
+                    foreignKey: 'comment_id'
+                });
+            }
+        }
     });
     return Articles;
 };

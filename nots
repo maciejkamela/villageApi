@@ -22,28 +22,6 @@ https://github.com/remy/nodemon#nodemon
 https://code.google.com/p/siege-windows/
 http://www.codeproject.com/Articles/996559/URL-shortener-in-Node-js-plus-Express-js-plus-MySQ
 
-
-
-POST
-
-{
-"title" : "Killer",
-"director": "XYZ",
-"genre" : "dramma",
-"production" : "PL",
-"year": 1999,
-"trailer": "https://www.youtube.com/watch?v=zmTGhBD1iNE",
-"poster": "http://1.fwcdn.pl/po/10/90/1090/7196616.3.jpg",
-"boxofficeInDollars" : 4930000,
-"mainRoles" :[
-  {"firstName" : "Cezaryt",
-  "lastName" : "Pazura"},
-  {"firstName" : "Joanna",
-  "lastName" : "Kozuchowska"}
-],
-"oscars" : 0
-}
-
 mongo:
  C:\Program Files\MongoDB\Server\3.0\bin\mongo.exe
 
@@ -64,33 +42,11 @@ mongo:
  http://localhost:3000/movies?title=Serpico
 
 
- sprawdz czy jest tak samo jesli nie to zapisz odpowiedniego SQL!
- CREATE TABLE `comments` (
-   `id` int(11) NOT NULL AUTO_INCREMENT,
-   `id_parent` int(11) DEFAULT NULL,
-   `nick` varchar(100) NOT NULL,
-   `title` varchar(150) NOT NULL,
-   `comment` text NOT NULL,
-   `plus` int(11) DEFAULT NULL,
-   `minus` int(11) DEFAULT NULL,
-   `cd` datetime NOT NULL,
-   PRIMARY KEY (`id`)
- ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin2
-
- oryginalny create comments:
-CREATE TABLE `comments` (
-  `id`        INT(11)      NOT NULL AUTO_INCREMENT,
-  `id_parent` INT(11)               DEFAULT NULL,
-  `nick`      VARCHAR(100) NOT NULL,
-  `title`     VARCHAR(150) NOT NULL,
-  `comment`   TEXT         NOT NULL,
-  `plus`      INT(11)               DEFAULT NULL,
-  `minus`     INT(11)               DEFAULT NULL,
-  `cd`        DATETIME     NOT NULL,
-  PRIMARY KEY (`id`)
-)
-  ENGINE = InnoDB
-  AUTO_INCREMENT = 16
-  DEFAULT CHARSET = latin2
-
-  wiec usun default nulla i nullable z plusa i minusa
+ comments i users beda w relacji 1:1
+"skad bede wiedzial ze komentarz dostyczy artykulu a nie zdjecia" no jak to skad
+ to beda dwa rozne formularze na stronie
+ musisz zrobic dwa endpointy
+ articles/comments
+ gallery/comments
+ jeden dodaje komentarz do galerii
+ drugi do artykulu

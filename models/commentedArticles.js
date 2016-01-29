@@ -11,15 +11,19 @@ module.exports = function (sequelize, DataTypes) {
         },
         article_id: {
             type: DataTypes.INTEGER,
-            references: 'articles',
-            referencesKey: 'id',
-            allowNull: false
+            references: {
+                model: 'articles',
+                key: 'id',
+                allowNull: false
+            }
         },
         comment_id: {
             type: DataTypes.INTEGER,
-            references: 'comments',
-            referencesKey: 'id',
-            allowNull: false
+            references: {
+                model: 'comments',
+                key: 'id',
+                allowNull: false
+            }
         }
     }, {
         updatedAt: false,

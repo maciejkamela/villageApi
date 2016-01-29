@@ -1,5 +1,4 @@
 'use strict';
-var models = require('../models/users');
 module.exports = function (sequelize, DataTypes) {
     var Comments = sequelize.define('comments', {
         id: {
@@ -40,6 +39,13 @@ module.exports = function (sequelize, DataTypes) {
             associate: function (models) {
                 this.belongsTo(models.users, {
                     foreignKey: 'user_id'
+                });
+            },
+            associate: function (models) {
+                this.belongsToMany(models.articles, {
+                    through: articles,
+                    as: 'articles',
+                    foreignKey: 'article_id'
                 });
             }
         }
