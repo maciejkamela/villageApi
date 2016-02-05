@@ -22,19 +22,12 @@ module.exports = (function () {
                 });
         },
         getAllComments: function (req, res) {
-            console.log(req.query);
+            console.log('doopa', req.query);
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC';
-            console.log("MODEL", models.users);
-            models.comments.findAndCountAll({
-                include: [models.users],
-                order: [
-                    ['cd', sort]
-                ],
-                offset: offset,
-                limit: count
-            })
+            //author = req.query.author || null;
+            supportModel.getRecords(offset, count, sort)
                 .then(function (comments) {
                     //for (var i in comments) {
                     //    //console.log(comments[i].User);

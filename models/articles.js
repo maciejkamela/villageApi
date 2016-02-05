@@ -31,9 +31,9 @@ module.exports = function (sequelize, DataTypes) {
         classMethods: {
             associate: function (models) {
                 this.belongsToMany(models.comments, {
-                    through: models.commentedArticles,
-                    as: 'comments',
-                    foreignKey: 'comment_id'
+                    through: 'commented_articles'
+                    //as: 'comments',
+                    //foreignKey: 'comment_id'
                 });
             }
         }

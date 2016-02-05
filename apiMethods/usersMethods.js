@@ -1,70 +1,80 @@
 /**
- * Created by camel on 2016-01-06.
+ * Created by camel on 2016-02-05.
  */
 var models = require('../models'),
     MyModel = require('../supportMethods/modelMethods'),
-    supportModel = new MyModel(models.articles);
+    supportModel = new MyModel(models.users);
 
 module.exports = (function () {
     return {
-        getSingleArticle: function (req, res) {
+        getSingleUser: function (req, res) {
             supportModel.getSingleRecord(req.params.id)
-                .then(function (article) {
-                    if (!article) {
+                .then(function (user) {
+                    if (!user) {
                         res.send({
                             status: 'error',
                             error: '404 - Not found.'
                         });
                     }
                     else {
-                        res.json(article);
+                        res.json(user);
                     }
                 });
         },
-        getAllArticles: function (req, res) {
-            console.log('doopa',req.query);
+        getAllUsers: function (req, res) {
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC';
-                //myModel = models.comments;
-
             supportModel.getRecords(offset, count, sort)
-                .then(function (articles) {
-                    res.json(articles);
+                .then(function (users) {
+                    res.json(users);
                 });
         },
-        getAllCommentedArticles: function (req, res) {
-            console.log(req.query);
+        getAllUsersComments: function (req, res) {
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC',
-            myModel = models.comments;
-            console.log('doopa', myModel);
-            supportModel.getRecordsWithIncludeModel(myModel,offset, count, sort)
-                .then(function (articles) {
-                    res.json(articles);
+                myModel = models.comments;
+            supportModel.getRecordsWithIncludeModel(myModel, offset, count, sort)
+                .then(function (users) {
+                    res.json(users);
                 });
         },
-        addNewArticle: function (req, res) {
-            var author = req.body.author,
-                title = req.body.title,
-                intro = req.body.intro,
-                article = req.body.article;
-            if (!author || !title || !intro || !article) {
+        getAllUsersArticles: function (req, res) {
+            var offset = req.query.offset || null,
+                count = req.query.count || null,
+                sort = req.query.sort || 'DESC',
+                myModel = models.articles;
+            console.log('doopa', myModel);
+            supportModel.getRecordsWithIncludeModel(myModel, offset, count, sort)
+                .then(function (users) {
+                    res.json(users);
+                });
+        },
+        addNewUser: function (req, res) {
+            var login = req.body.login,
+                password = req.body.password,
+                firstName = req.body.firstName,
+                lastName = req.body.lastName,
+                email = req.body.email,
+                status = req.body.status,
+                admin = req.body.admin,
+                ip = req.body.admin;
+            if (!login || !password || !firstName || !lastName) {
                 res.json({
                     status: 'error',
                     msg: '400 - Bad request.'
                 });
             } else {
-                var newArticle = models.articles.build({
-                    author: author.trim(),
-                    title: title.trim(),
-                    intro: intro.trim(),
-                    article: article.trim()
+                var newUser = models.articles.build({
+                    login: login.trim(),
+                    password: password.trim(),
+                    firstName: firstName.trim(),
+                    lastName: lastName.trim()
                 });
-                newArticle.save()
+                newUser.save()
                     .then(function () {
-                        res.json(newArticle);
+                        res.json(newUser);
                     })
                     .catch(function (e) {
                         res.json(e);
@@ -78,7 +88,7 @@ module.exports = (function () {
                         article.updateAttributes({
                             author: req.body.author.trim(),
                             title: req.body.title.trim(),
-                            intro: req.body.intro.trim(),
+                            firstName: req.body.intro.trim(),
                             article: req.body.article.trim()
                         }).then(function (article) {
                             res.send(article);

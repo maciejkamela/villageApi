@@ -25,11 +25,21 @@ module.exports = function (sequelize, DataTypes) {
         },
         plus: {
             type: DataTypes.INTEGER,
-            defaultValue: null
+            defaultValue: null,
+            validate: {
+                isInt: {
+                    msg: "Must be an integer number."
+                }
+            }
         },
         minus: {
             type: DataTypes.INTEGER,
-            defaultValue: null
+            defaultValue: null,
+            validate: {
+                isInt: {
+                    msg: "Must be an integer number."
+                }
+            }
         }
     }, {
         createdAt: 'cd',
@@ -37,20 +47,14 @@ module.exports = function (sequelize, DataTypes) {
         freezeTableName: true,
         classMethods: {
             associate: function (models) {
-                this.belongsTo(models.users, {
-                    foreignKey: 'user_id'
-                });
-            },
-            associate: function (models) {
                 this.belongsToMany(models.articles, {
-                    through: articles,
-                    as: 'articles',
-                    foreignKey: 'article_id'
+                    through: 'commented_articles'
+                    //as: 'articles',
+                    //foreignKey: 'article_id'
                 });
             }
         }
     });
-    //Comments.belongsTo(models, {foreignKey: 'user_id'});
     return Comments;
 };
 

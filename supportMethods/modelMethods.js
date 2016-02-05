@@ -18,4 +18,18 @@ NewModel.prototype.getRecords = function (start, count, orderType) {
 NewModel.prototype.getSingleRecord = function (id) {
     return this.model.findByPrimary(id);
 };
+NewModel.prototype.getRecordsWithIncludeModel = function (myModel, start, count, orderType) {
+    return this.model.findAndCountAll({
+        include: [{
+            model:myModel
+            //,
+            //where: {login: {$like: '%'+ author+ '%'}}
+        }],
+        order: [
+            ['cd', orderType]
+        ],
+        offset:start,
+        limit:count
+    });
+};
 module.exports = NewModel;

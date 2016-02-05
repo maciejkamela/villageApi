@@ -22,7 +22,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING
         },
         email: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            validate: {
+                isEmail: true
+            }
         },
         status: {
             type: DataTypes.INTEGER,
@@ -33,14 +36,26 @@ module.exports = function (sequelize, DataTypes) {
             defaultValue: null
         },
         ip: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            validate: {
+                isIP: true
+            }
         }
     }, {
         createdAt: 'cd',
         updatedAt: false,
-        freezeTableName: true
+        freezeTableName: true,
+        classMethods: {
+            associate: function (models) {
+                this.hasMany(models.comments, {
+                    foreignKey: 'user_id'
+                });
+                this.hasMany(models.articles, {
+                    foreignKey: 'user_id'
+                });
+            }
+        }
     });
-    //Users.hasMany(Comments, {foreignKey: 'id'});
     return Users;
 };
 
