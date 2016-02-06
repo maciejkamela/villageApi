@@ -6,30 +6,32 @@ function NewModel(model) {
 }
 
 NewModel.prototype.getRecords = function (start, count, orderType) {
-    console.log('limit',arguments);
+    console.log('limit', arguments);
     return this.model.findAndCountAll({
         order: [
             ['cd', orderType]
         ],
-        offset:start,
-        limit:count
+        offset: start,
+        limit: count
     });
 };
-NewModel.prototype.getSingleRecord = function (id) {
-    return this.model.findByPrimary(id);
+NewModel.prototype.getSingleRecord = function (id, myModel) {
+    return this.model.findByPrimary(id, {
+        include: [{
+            model: myModel
+        }]
+    });
 };
 NewModel.prototype.getRecordsWithIncludeModel = function (myModel, start, count, orderType) {
     return this.model.findAndCountAll({
         include: [{
-            model:myModel
-            //,
-            //where: {login: {$like: '%'+ author+ '%'}}
+            model: myModel
         }],
         order: [
             ['cd', orderType]
         ],
-        offset:start,
-        limit:count
+        offset: start,
+        limit: count
     });
 };
 module.exports = NewModel;

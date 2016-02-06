@@ -8,7 +8,8 @@ var models = require('../models'),
 module.exports = (function () {
     return {
         getSingleUser: function (req, res) {
-            supportModel.getSingleRecord(req.params.id)
+            var myModel = models.comments;
+            supportModel.getSingleRecord(req.params.id, myModel)
                 .then(function (user) {
                     if (!user) {
                         res.send({
@@ -52,25 +53,30 @@ module.exports = (function () {
                 });
         },
         addNewUser: function (req, res) {
+            //console.log(req);
             var login = req.body.login,
                 password = req.body.password,
-                firstName = req.body.firstName,
-                lastName = req.body.lastName,
+                first_name = req.body.first_name,
+                last_name = req.body.last_name,
                 email = req.body.email,
-                status = req.body.status,
-                admin = req.body.admin,
-                ip = req.body.admin;
-            if (!login || !password || !firstName || !lastName) {
+                status = req.body.status || 0,
+                admin = req.body.admin || 0,
+                ip = req.body.ip;
+            if (!login || !password || !first_name || !last_name || !email || !ip) {
                 res.json({
                     status: 'error',
                     msg: '400 - Bad request.'
                 });
             } else {
-                var newUser = models.articles.build({
+                var newUser = models.users.build({
                     login: login.trim(),
                     password: password.trim(),
-                    firstName: firstName.trim(),
-                    lastName: lastName.trim()
+                    first_name: first_name.trim(),
+                    last_name: last_name.trim(),
+                    email: email.trim(),
+                    status: status,
+                    admin: admin,
+                    ip: ip
                 });
                 newUser.save()
                     .then(function () {
@@ -80,45 +86,7 @@ module.exports = (function () {
                         res.json(e);
                     });
             }
-        },
-        updateArticle: function (req, res) {
-            supportModel.getSingleRecord(req.params.id)
-                .then(function (article) {
-                    if (article) {
-                        article.updateAttributes({
-                            author: req.body.author.trim(),
-                            title: req.body.title.trim(),
-                            firstName: req.body.intro.trim(),
-                            article: req.body.article.trim()
-                        }).then(function (article) {
-                            res.send(article);
-                        });
-                    } else {
-                        res.json({
-                            status: 'error',
-                            msg: '404 - Not found.'
-                        });
-                    }
-                });
-        },
-        deleteSingleArticle: function (req, res) {
-            supportModel.getSingleRecord(req.params.id)
-                .then(function (article) {
-                    if (article) {
-                        article.destroy()
-                            .then(function () {
-                                res.json({
-                                    status: 'success',
-                                    msg: 'Successfully removed record with id ' + req.params.id
-                                });
-                            });
-                    } else {
-                        res.json({
-                            status: 'error',
-                            msg: '404 - Not found.'
-                        });
-                    }
-                });
         }
     };
+    //ToDo update user i delete user. co chcemy updatowac i czy usuwamy userow. Ja wolalbym nie usuwac.
 })();

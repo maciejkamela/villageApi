@@ -8,7 +8,8 @@ var models = require('../models'),
 module.exports = (function () {
     return {
         getSingleArticle: function (req, res) {
-            supportModel.getSingleRecord(req.params.id)
+            var myModel = models.comments;
+            supportModel.getSingleRecord(req.params.id, myModel)
                 .then(function (article) {
                     if (!article) {
                         res.send({
@@ -72,7 +73,7 @@ module.exports = (function () {
             }
         },
         updateArticle: function (req, res) {
-            supportModel.getSingleRecord(req.params.id)
+            models.articles.findByPrimary(req.params.id)
                 .then(function (article) {
                     if (article) {
                         article.updateAttributes({
@@ -92,7 +93,7 @@ module.exports = (function () {
                 });
         },
         deleteSingleArticle: function (req, res) {
-            supportModel.getSingleRecord(req.params.id)
+            models.articles.findByPrimary(req.params.id)
                 .then(function (article) {
                     if (article) {
                         article.destroy()

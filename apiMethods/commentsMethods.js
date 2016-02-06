@@ -8,7 +8,7 @@ var supportModel = new MyModel(models.comments);
 module.exports = (function () {
     return {
         getSingleComment: function (req, res) {
-            supportModel.getSingleRecord(req.params.id)
+            models.comments.findByPrimary(req.params.id)
                 .then(function (comment) {
                     if (!comment) {
                         res.send({
@@ -22,7 +22,6 @@ module.exports = (function () {
                 });
         },
         getAllComments: function (req, res) {
-            console.log('doopa', req.query);
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC';
@@ -76,7 +75,7 @@ module.exports = (function () {
                 plus = req.body.plus,
                 minus = req.body.minus,
                 id_parent = req.body.id_parent;
-            supportModel.getSingleRecord(req.params.id)
+            models.comments.findByPrimary(req.params.id)
                 .then(function (updatedComment) {
                     if (updatedComment) {
                         updatedComment.updateAttributes({
@@ -98,7 +97,7 @@ module.exports = (function () {
                 });
         },
         deleteSingleComment: function (req, res) {
-            supportModel.getSingleRecord(req.params.id)
+            models.comments.findByPrimary(req.params.id)
                 .then(function (comment) {
                     if (comment) {
                         comment.destroy()

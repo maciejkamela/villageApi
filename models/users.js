@@ -2,6 +2,8 @@
  * Created by camel on 2016-01-25.
  */
 'use strict';
+var Sequelize = require('sequelize');
+require('sequelize-isunique-validator')(Sequelize);
 module.exports = function (sequelize, DataTypes) {
     var Users = sequelize.define('users', {
         id: {
@@ -10,10 +12,15 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true
         },
         login: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            isUnique: true,
+            validate: {
+                isUnique: sequelize.validateIsUnique('login')
+            }
         },
         password: {
             type: DataTypes.STRING
+            //ToDo pewnie jakas walidacja na dlugosc i skomplikowanie hasla
         },
         first_name: {
             type: DataTypes.STRING
@@ -23,17 +30,25 @@ module.exports = function (sequelize, DataTypes) {
         },
         email: {
             type: DataTypes.STRING,
+            isUnique: true,
             validate: {
-                isEmail: true
+                isEmail: true,
+                isUnique: sequelize.validateIsUnique('email')
             }
         },
         status: {
             type: DataTypes.INTEGER,
-            defaultValue: null
+            defaultValue: null,
+            validate: {
+                isIn: [[0, 1]]
+            }
         },
         admin: {
             type: DataTypes.INTEGER,
-            defaultValue: null
+            defaultValue: null,
+            validate: {
+                isIn: [[0, 1]]
+            }
         },
         ip: {
             type: DataTypes.STRING,

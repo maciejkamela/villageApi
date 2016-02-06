@@ -7,7 +7,7 @@ module.exports = function (app) {
     app.get('/users/articles', users.getAllUsersArticles);
     app.get('/users/:id', users.getSingleUser);
     app.get('/users', users.getAllUsers);
-    //app.post('/users', users.addNewUser);
+    app.post('/users', users.addNewUser);
     //app.put('/users/:id', users.updateUser);
     //app.delete('/users/:id', users.deleteSingleUser);
     //app.get('/users/comments', users.getAllUsers);
