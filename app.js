@@ -11,6 +11,7 @@ app.use(bodyParser.json());
 require('./routes/articlesRoute')(app);
 require('./routes/commentsRoute')(app);
 require('./routes/usersRoute')(app);
+require('./routes/galleryRoute')(app);
 app.use(function (req, res) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Requested-With");

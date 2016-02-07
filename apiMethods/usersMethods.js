@@ -8,8 +8,8 @@ var models = require('../models'),
 module.exports = (function () {
     return {
         getSingleUser: function (req, res) {
-            var myModel = models.comments;
-            supportModel.getSingleRecord(req.params.id, myModel)
+            var includedModel = models.comments;
+            supportModel.getSingleRecord(req.params.id, includedModel)
                 .then(function (user) {
                     if (!user) {
                         res.send({
@@ -35,8 +35,8 @@ module.exports = (function () {
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC',
-                myModel = models.comments;
-            supportModel.getRecordsWithIncludeModel(myModel, offset, count, sort)
+                includedModel = models.comments;
+            supportModel.getRecordsWithIncludeModel(includedModel, offset, count, sort)
                 .then(function (users) {
                     res.json(users);
                 });
@@ -45,9 +45,9 @@ module.exports = (function () {
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC',
-                myModel = models.articles;
-            console.log('doopa', myModel);
-            supportModel.getRecordsWithIncludeModel(myModel, offset, count, sort)
+                includedModel = models.articles;
+            console.log('doopa', includedModel);
+            supportModel.getRecordsWithIncludeModel(includedModel, offset, count, sort)
                 .then(function (users) {
                     res.json(users);
                 });

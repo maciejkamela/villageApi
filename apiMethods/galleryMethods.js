@@ -1,49 +1,47 @@
 /**
- * Created by camel on 2016-01-06.
+ * Created by camel on 2016-02-07.
  */
 var models = require('../models'),
     MyModel = require('../supportMethods/modelMethods'),
-    supportModel = new MyModel(models.articles);
+    supportModel = new MyModel(models.gallery);
 
 module.exports = (function () {
     return {
-        getSingleArticle: function (req, res) {
+        getSingleImage: function (req, res) {
             var includedModel = models.comments;
             supportModel.getSingleRecord(req.params.id, includedModel)
-                .then(function (article) {
-                    if (!article) {
+                .then(function (images) {
+                    if (!images) {
                         res.send({
                             status: 'error',
                             error: '404 - Not found.'
                         });
                     }
                     else {
-                        res.json(article);
+                        res.json(images);
                     }
                 });
         },
-        getAllArticles: function (req, res) {
+        getAllImages: function (req, res) {
             console.log('doopa',req.query);
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC';
-                //includedModel = models.comments;
-
             supportModel.getRecords(offset, count, sort)
-                .then(function (articles) {
-                    res.json(articles);
+                .then(function (images) {
+                    res.json(images);
                 });
         },
-        getAllCommentedArticles: function (req, res) {
+        getAllCommentedImages: function (req, res) {
             console.log(req.query);
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC',
-            includedModel = models.comments;
+                includedModel = models.comments;
             console.log('doopa', includedModel);
             supportModel.getRecordsWithIncludeModel(includedModel,offset, count, sort)
-                .then(function (articles) {
-                    res.json(articles);
+                .then(function (images) {
+                    res.json(images);
                 });
         },
         addNewArticle: function (req, res) {
