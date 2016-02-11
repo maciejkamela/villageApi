@@ -1,6 +1,9 @@
 /**
  * Created by camel on 2016-01-06.
  */
+
+//toDo jak przeniesć metody z apiMethods do jedego pliku, bo te metody sa prawie takie same
+// toDo kwestia jak przekazywac model do routa?
 var models = require('../models'),
     MyModel = require('../supportMethods/modelMethods'),
     supportModel = new MyModel(models.articles);
@@ -23,11 +26,11 @@ module.exports = (function () {
                 });
         },
         getAllArticles: function (req, res) {
-            console.log('doopa',req.query);
+            console.log('doopa', req.query);
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC';
-                //includedModel = models.comments;
+            //includedModel = models.comments;
 
             supportModel.getRecords(offset, count, sort)
                 .then(function (articles) {
@@ -39,9 +42,9 @@ module.exports = (function () {
             var offset = req.query.offset || null,
                 count = req.query.count || null,
                 sort = req.query.sort || 'DESC',
-            includedModel = models.comments;
+                includedModel = models.comments;
             console.log('doopa', includedModel);
-            supportModel.getRecordsWithIncludeModel(includedModel,offset, count, sort)
+            supportModel.getRecordsWithIncludeModel(includedModel, offset, count, sort)
                 .then(function (articles) {
                     res.json(articles);
                 });
