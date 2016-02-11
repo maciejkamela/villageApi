@@ -4,6 +4,7 @@
 'use strict';
 var Sequelize = require('sequelize');
 require('sequelize-isunique-validator')(Sequelize);
+var bcrypt = require('bcryptjs');
 module.exports = function (sequelize, DataTypes) {
     var Users = sequelize.define('users', {
         id: {
@@ -20,7 +21,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         password: {
             type: DataTypes.STRING
-            //ToDo pewnie jakas walidacja na dlugosc i skomplikowanie hasla
+            //ToDo pewnie jakas walidacja na dlugosc i skomplikowanie hasla. jest hook na crypto password
         },
         first_name: {
             type: DataTypes.STRING
@@ -60,6 +61,13 @@ module.exports = function (sequelize, DataTypes) {
         createdAt: 'cd',
         updatedAt: false,
         freezeTableName: true,
+        hooks: {
+          afterValidate: function (user) {
+              console.log('afterValidate');
+              user.password = bcrypt.hashSync(user.password, 8);
+              //toDo jak szyfrowana jest produkcja?
+          }
+        },
         classMethods: {
             associate: function (models) {
                 this.hasMany(models.comments, {
