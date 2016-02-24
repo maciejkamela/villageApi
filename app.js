@@ -1,3 +1,4 @@
+'use strict';
 var models = require("./models"),
     express = require("express"),
     app = express(),

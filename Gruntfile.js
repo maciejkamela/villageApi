@@ -13,7 +13,8 @@ module.exports = function(grunt) {
                 'routs/*.js',
                 'app.js',
                 'models/*.js',
-                'apiMethods/*.js'
+                'apiMethods/*.js',
+                'supportMethods/*.js'
             ],
             options: {
                 jshintrc: '.jshintrc'
