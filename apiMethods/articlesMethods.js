@@ -41,7 +41,7 @@ module.exports = (function () {
             console.log(req.query);
             var offset = req.query.offset || null,
                 count = req.query.count || null,
-                sort = req.query.sort || 'DESC',
+                sort = req.query.sort || 'ASC',
                 includedModel = models.comments;
             console.log('doopa', includedModel);
             supportModel.getRecordsWithIncludeModel(includedModel, offset, count, sort)
