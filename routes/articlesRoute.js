@@ -10,5 +10,4 @@ module.exports = function (app) {
     app.post('/articles', articles.addNewArticle);
     app.put('/articles/:id', articles.updateArticle);
     app.delete('/articles/:id', articles.deleteSingleArticle);
-    app.post('/dupa', articles.setArticle);
-};
+    };

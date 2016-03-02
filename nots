@@ -5,6 +5,7 @@ curl http://localhost:3000/articles/12
 add migration migration_name
 
 do sprawdzenia: https://github.com/sequelize/express-example/blob/master/routes/users.js
+http://stackoverflow.com/questions/28921074/node-js-sequelize-js-express-js-how-to-insert-into-many-to-many-associatio
 
 http://localhost:3000/articles?offset=2&count=5&sort=DESC
 

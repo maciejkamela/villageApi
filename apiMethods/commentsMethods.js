@@ -40,33 +40,30 @@ module.exports = (function () {
          * @param req
          * @param res
          */
-        addNewComment: function (req, res) {
+        addNewCommentToArticle: function (req, res) {
             var id_parent = req.body.id_parent,
                 user_id = req.body.user_id,
                 nick = req.body.nick,
                 title = req.body.title,
                 comment = req.body.comment;
-            if (!nick || !title || !comment) {
-                res.json({
-                    status: 'error',
-                    msg: '400 - Bad request.'
-                });
-            } else {
-                var newComment = models.comments.build({
-                    id_parent: id_parent,
-                    user_id: user_id,
-                    nick: nick.trim(),
-                    title: title.trim(),
-                    comment: comment.trim()
-                });
-                newComment.save()
-                    .then(function () {
-                        res.json(newComment);
+            models.articles.findByPrimary(req.params.id)
+                .then(function (createdArticle) {
+                    models.comments.create({
+                        id_parent: id_parent,
+                        user_id: user_id,
+                        nick: nick.trim(),
+                        title: title.trim(),
+                        comment: comment.trim()
+                    }).then(function (newComment) {
+                        createdArticle.addComments(newComment)
+                            .then(function () {
+                                res.json(newComment);
+                            })
+                            .catch(function (e) {
+                                res.json(e);
+                            });
                     })
-                    .catch(function (e) {
-                        res.json(e);
-                    });
-            }
+                });
         },
         updateComment: function (req, res) {
             var nick = req.body.nick,

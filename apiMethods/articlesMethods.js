@@ -25,14 +25,6 @@ module.exports = (function () {
                     }
                 });
         },
-        setArticle: function (req, res) {
-            models.articles.addComments(models.comments, {
-                user_id: req.body.user_id,
-                nick: req.body.nick,
-                title: req.body.title,
-                comment: req.body.comment
-            })
-        },
         getAllArticles: function (req, res) {
             console.log('doopa', req.query);
             var offset = req.query.offset || null,
