@@ -72,45 +72,66 @@ module.exports = (function () {
                 plus = req.body.plus,
                 minus = req.body.minus,
                 id_parent = req.body.id_parent;
-            models.comments.findByPrimary(req.params.id)
-                .then(function (updatedComment) {
-                    if (updatedComment) {
-                        updatedComment.updateAttributes({
-                            id_parent: id_parent || 0,
-                            nick: nick,
-                            title: title,
-                            comment: comment,
-                            plus: plus || 0,
-                            minus: minus || 0
-                        }).then(function (updatedComment) {
-                            res.send(updatedComment);
+            models.articles.findByPrimary(req.params.articleId)//ToDo jak zrobic zeby odroznic to id od id komentarza
+                .then(function (article) {
+                    if (!article) {
+                        res.send({
+                            status: 'error',
+                            error: '404 - Article not found.'
                         });
                     } else {
-                        res.json({
-                            status: 'error',
-                            msg: '404 - Not found.'
-                        });
+                        models.comments.findByPrimary(req.params.id)
+                            .then(function (updatedComment) {
+                                if (updatedComment) {
+                                    updatedComment.updateAttributes({
+                                        id_parent: id_parent || null,
+                                        nick: nick,
+                                        title: title,
+                                        comment: comment,
+                                        plus: plus || 0,
+                                        minus: minus || 0
+                                    }).then(function (updatedComment) {
+                                        res.send(updatedComment);
+                                    });
+                                } else {
+                                    res.json({
+                                        status: 'error',
+                                        msg: '404 - Comment not found.'
+                                    });
+                                }
+                            });
                     }
-                });
+                })
         },
         deleteSingleComment: function (req, res) {
-            models.comments.findByPrimary(req.params.id)
-                .then(function (comment) {
-                    if (comment) {
-                        comment.destroy()
-                            .then(function () {
-                                res.json({
-                                    status: 'success',
-                                    msg: 'Successfully removed record with id ' + req.params.id
-                                });
-                            });
-                    } else {
-                        res.json({
+            models.articles.findByPrimary(req.params.articleId)
+                .then(function (article) {
+                    if (!article) {
+                        res.send({
                             status: 'error',
-                            msg: '404 - Not found.'
+                            error: '404 - Article not found.'
                         });
+                    } else {
+                        models.comments.findByPrimary(req.params.id)
+                            .then(function (comment) {
+                                if (comment) {
+                                    comment.destroy()
+                                        .then(function () {
+                                            res.json({
+                                                status: 'success',
+                                                msg: 'Successfully removed record with id ' + req.params.id
+                                            });
+                                        });
+                                } else {
+                                    res.json({
+                                        status: 'error',
+                                        msg: '404 - Comment not found.'
+                                    });
+                                }
+                            });
                     }
-                });
+                })
+
         }
     };
 })();

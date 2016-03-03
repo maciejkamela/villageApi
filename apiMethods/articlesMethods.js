@@ -14,6 +14,7 @@ module.exports = (function () {
             var includedModel = models.comments;
             supportModel.getSingleRecord(req.params.id, includedModel)
                 .then(function (article) {
+                    console.log(article);
                     if (!article) {
                         res.send({
                             status: 'error',
@@ -24,6 +25,16 @@ module.exports = (function () {
                         res.json(article);
                     }
                 });
+                //.then(function () {
+                //    models.comments.findAll({
+                //        where: {
+                //            id_parent: 68
+                //        }
+                //    })
+                //})
+                //.then(function (x) {
+                //    res.json(x);
+                //})
         },
         getAllArticles: function (req, res) {
             console.log('doopa', req.query);
